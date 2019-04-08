@@ -14,6 +14,8 @@ from scipy.fftpack import fft, ifft
 from scikits.talkbox.linpred import lpc
 import shutil
 from helpers.utilities import *
+import tqdm
+import ipdb as pdb
 
 epsilon = 0.0000000001
 prefac = .97
@@ -240,6 +242,10 @@ def specPS(input_wav,pitch):
                 peri.append(epsilon)
             else:
                 peri.append(math.log(math.sqrt((k ** 2) + (l ** 2))))
+        # Fix values<=0 to prevent nan
+        if sum(n<0 for n in peri)>0:
+            eps = np.finfo(float).eps
+            peri = [eps if p<=0 else p for p in peri]
         # Filter the spectrum through the triangle filterbank
         mspec = np.log10(peri)
         # Use the DCT to 'compress' the coefficients (spectrum -> cepstrum domain)

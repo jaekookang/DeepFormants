@@ -1,3 +1,13 @@
+## History
+- 2019-04-06
+	- tested
+	- Do not install lua independently.
+	- Use Python2 (mainly because of scikit.talkbox).
+	- For tracking, outdated package error `unknown Torch class <nn.LinearNoBias>` appears. To fix this, see [https://github.com/torch/rnn/issues/39](https://github.com/torch/rnn/issues/39). 
+	- `extract_feeatures.py`: epsilon was added to prevent nan for np.log10.
+
+---
+
 DeepFormants
 ============
 
